@@ -21,10 +21,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const element = document.getElementById("content");
         element.classList.remove("hidden");
     }
-    
+
     function fetchAndDisplayUser() {
         // Fetch user details from GitHub API
-        const userPromise = new Promise((resolve) => {
+        const userPromise = new Promise((resolve, reject) => {
             $.getJSON(`https://api.github.com/users/${githubUsername}`, function (user) {
                 // Update profile details
                 $('#profilePic').attr('src', user.avatar_url);
@@ -38,6 +38,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 totalSets = Math.ceil(totalRepos/100);
                 console.log('totalRepos: ', totalRepos)
                 resolve(); // Resolve the promise when user details are fetched
+            }).fail(function (jqXHR) {
+
+                // 404() status code represents wrong query in API
+                // and 403() status code represents no reponse which is due to rate limit!
+                if (jqXHR.status === 404) {
+                    alert(`User with name "${githubUsername}" not found! `);
+                } else if (jqXHR.status === 403) {
+                    alert('API rate limit exceeded! Please try again later.', githubUsername);
+                }
+                reject();
+                window.location.href = 'index.html';
+
             });
         });
 
@@ -88,6 +100,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 Promise.all(requests).then(() => {
                     resolve();
                 });
+            }).fail(function (err) {
+                console.log(err);
             });
         });
     }

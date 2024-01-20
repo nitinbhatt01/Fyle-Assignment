@@ -33,8 +33,13 @@
     <!-- internal script -->
     <script>
         function getDetails() {
-            const username = document.getElementById('username').value;
+            const usernameInput = document.getElementById('username');
+            const username = usernameInput.value.trim();
 
+            if (username === '') {
+                alert('Please enter a GitHub username.');
+                return;
+            }
             const url = `main.html?username=${encodeURIComponent(username)}`;
             window.location.href = url;
         }
