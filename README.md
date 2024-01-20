@@ -26,15 +26,15 @@ The application will fetch the user details and repositories from GitHub. You ca
 
 Technologies Used:
 
-HTML
+ - HTML
 
-CSS
+ - CSS
 
-JavaScript
+ - JavaScript
 
-jQuery
+ - jQuery
 
-GitHub API
+ - GitHub API
 
 
 Feel free to explore GitHub profiles and repositories seamlessly with GitHub Profile Explorer!
