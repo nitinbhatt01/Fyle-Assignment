@@ -41,7 +41,7 @@ $(document).ready(function () {
                     if (jqXHR.status === 404) {
                         alert(`User with name "${githubUsername}" not found!`);
                     } else if (jqXHR.status === 403) {
-                        alert('API rate limit exceeded! Please try again later.', githubUsername);
+                        alert('API rate limit exceeded! Please try again later.');
                     }
                     reject();
                     window.location.href = 'index.html';
