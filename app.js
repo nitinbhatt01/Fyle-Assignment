@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    // fetching username from URL params
     const urlParams = new URLSearchParams(window.location.search);
     const githubUsername = urlParams.get('username');
 
@@ -91,15 +92,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-
+    //Function for navigating pages using button
     window.goToPage = function(page) {
         currentPage = page===10 ? 10 : page%10;
         fetchAndDisplayRepos();
     };    
 
+    //Function for updating the pagination block acc. to latest changes
     function updatePagination() {
         totalPages = Math.ceil(totalRepos / reposPerPage);
-
 
         //for updating page buttons 
         const paginationButtons= $('#pagination .pageBtn');
@@ -128,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
             paginationButtons.append(`<button class="btn btn-secondary" onclick="nextPage()">>></button>`);
         }
 
-        //for updating oher page items 
+        //for updating oher page items (older and newer)
         $('#pagination .pageOtherItems').html(`
                 <button class="btn btn-secondary" ${currentSet === 1 ? 'disabled' : ''} onclick="prevSet()"><i class="fa-solid fa-arrow-left"></i> Older</button>
                 <button class="btn btn-secondary" ${currentSet === totalSets ? 'disabled' : ''} onclick="nextSet()">Newer <i class="fa-solid fa-arrow-right"></i></button>`);
